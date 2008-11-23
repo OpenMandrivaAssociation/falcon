@@ -2,7 +2,7 @@
 
 Name:           falcon
 Version:        0.8.12
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
@@ -44,7 +44,7 @@ aims to be both simple and powerful.
 
 %package   devel
 Summary:   Development files for %{name}
-Group:     Development/Libraries
+Group:     Development/Other
 Requires:  %{name} = %{version}-%{release}
 
 %description devel
