@@ -5,10 +5,9 @@ Version:        0.8.12
 Release:        %mkrel 1
 Summary:        The Falcon Programming Language
 License:        GPLv2+
-Group:          Development/Languages
+Group:          Development/Other
 URL:            http://www.falconpl.org/
 Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tar.gz
-#Patch0:         Falcon-0.8.10-prefix.patch
 BuildRoot:      %_tmppath/%name-%version-%release-root
 BuildRequires:  bison 
 BuildRequires:  cmake 
@@ -73,7 +72,6 @@ necessary for using the %{name} interpreter.
 #--------------------------------------------------------------------
 %prep
 %setup -q -n %oname-%version
-#patch0 -p1 -b .prefix
 
 
 %build
