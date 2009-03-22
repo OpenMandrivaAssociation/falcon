@@ -1,8 +1,8 @@
 %define oname   Falcon
 
 Name:           falcon
-Version:        0.8.12
-Release:        %mkrel 2
+Version:        0.8.14.2
+Release:        %mkrel 1
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
@@ -71,7 +71,7 @@ necessary for using the %{name} interpreter.
 
 #--------------------------------------------------------------------
 %prep
-%setup -q -n %oname-%version
+%setup -q -n %oname-0.8.14
 
 
 %build
