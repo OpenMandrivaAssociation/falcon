@@ -2,7 +2,7 @@
 
 Name:           falcon
 Version:        0.8.14.2
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
