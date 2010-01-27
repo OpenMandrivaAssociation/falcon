@@ -1,13 +1,13 @@
 %define oname   Falcon
 
 Name:           falcon
-Version:        0.9.4.4
+Version:        0.9.6
 Release:        %mkrel 1
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
 URL:            http://www.falconpl.org/
-Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tar.gz
+Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}-1.tar.gz
 BuildRoot:      %_tmppath/%name-%version-%release-root
 BuildRequires:  bison 
 BuildRequires:  cmake 
@@ -63,6 +63,7 @@ necessary for using the %{name} interpreter.
 %{_bindir}/falcon-conf
 %{_bindir}/falconeer.fal
 %{_bindir}/faltest
+%{_prefix}/lib/falcon/cmake/*.cmake
 %{_includedir}/*
 %{_libdir}/*.so
 %{_mandir}/man1/falcon-conf*
@@ -73,23 +74,15 @@ necessary for using the %{name} interpreter.
 %prep
 %setup -q -n %oname-%{version}
 
-
 %build
-CXXFLAGS="$RPM_OPT_FLAGS -w" CFLAGS="$RPM_OPT_FLAGS -w" ./build.sh \
-  -p $RPM_BUILD_ROOT%{_prefix} -f %{_prefix} -l %{_lib} %{?_smp_flags}
+%setup_compile_flags
+./build.sh \
+  -p %buildroot%{_prefix} -f %{_prefix} -l %{_lib}
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 ./build.sh -i
-# with cmake-2.6, the default install target misses some files
-[ -f $RPM_BUILD_ROOT%{_bindir}/faltest ] || \
-  (cd devel/release/build/core && make install && \
-   cd ../modules/feathers && make install)
-# Fix falconeer script
-sed -i "s|#!/bin/falcon|#!%{_bindir}/falcon|" \
-  $RPM_BUILD_ROOT%{_bindir}/falconeer.fal
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
