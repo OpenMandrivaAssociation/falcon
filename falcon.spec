@@ -1,13 +1,13 @@
 %define oname   Falcon
 
 Name:           falcon
-Version:        0.9.6
+Version:        0.9.6.4
 Release:        %mkrel 1
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
 URL:            http://www.falconpl.org/
-Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}-1.tar.gz
+Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tar.gz
 BuildRoot:      %_tmppath/%name-%version-%release-root
 BuildRequires:  bison 
 BuildRequires:  cmake 
@@ -63,7 +63,7 @@ necessary for using the %{name} interpreter.
 %{_bindir}/falcon-conf
 %{_bindir}/falconeer.fal
 %{_bindir}/faltest
-%{_prefix}/lib/falcon/cmake/*.cmake
+%{_libdir}/falcon/cmake/*.cmake
 %{_includedir}/*
 %{_libdir}/*.so
 %{_mandir}/man1/falcon-conf*
