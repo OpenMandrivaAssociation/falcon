@@ -33,8 +33,8 @@ aims to be both simple and powerful.
 %{_bindir}/faldisass
 %{_bindir}/fallc.fal
 %{_bindir}/falrun
+%{_bindir}/falpack
 %{_libdir}/falcon
-%{_libdir}/falpack
 %{_libdir}/*.so.*
 %{_mandir}/man1/falcon.1.*
 %{_mandir}/man1/faldisass.1.*
