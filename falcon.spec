@@ -34,11 +34,13 @@ aims to be both simple and powerful.
 %{_bindir}/fallc.fal
 %{_bindir}/falrun
 %{_libdir}/falcon
+%{_libdir}/falpack
 %{_libdir}/*.so.*
 %{_mandir}/man1/falcon.1.*
 %{_mandir}/man1/faldisass.1.*
 %{_mandir}/man1/fallc.fal.1.*
 %{_mandir}/man1/falrun.1.*
+%{_mandir}/man1/falpack.1.*
 
 #--------------------------------------------------------------------
 
