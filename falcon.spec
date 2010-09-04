@@ -1,13 +1,13 @@
 %define oname   Falcon
 
 Name:           falcon
-Version:        0.9.6.4
+Version:        0.9.6.6
 Release:        %mkrel 1
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
 URL:            http://www.falconpl.org/
-Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tar.gz
+Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tgz
 BuildRoot:      %_tmppath/%name-%version-%release-root
 BuildRequires:  bison 
 BuildRequires:  cmake 
@@ -36,11 +36,13 @@ aims to be both simple and powerful.
 %{_bindir}/falpack
 %{_libdir}/falcon
 %{_libdir}/*.so.*
+%{_datadir}/falcon
 %{_mandir}/man1/falcon.1.*
 %{_mandir}/man1/faldisass.1.*
 %{_mandir}/man1/fallc.fal.1.*
 %{_mandir}/man1/falrun.1.*
 %{_mandir}/man1/falpack.1.*
+%exclude %{_datadir}/falcon/cmake
 
 #--------------------------------------------------------------------
 
@@ -65,7 +67,7 @@ necessary for using the %{name} interpreter.
 %{_bindir}/falcon-conf
 %{_bindir}/falconeer.fal
 %{_bindir}/faltest
-%{_libdir}/falcon/cmake/*.cmake
+%{_datadir}/falcon/cmake/*.cmake
 %{_includedir}/*
 %{_libdir}/*.so
 %{_mandir}/man1/falcon-conf*
@@ -77,14 +79,12 @@ necessary for using the %{name} interpreter.
 %setup -q -n %oname-%{version}
 
 %build
-%setup_compile_flags
-./build.sh \
-  -p %buildroot%{_prefix} -f %{_prefix} -l %{_lib}
-
+%cmake -DFALCON_LIB_DIR=%{_libdir} -DFALCON_SHARE_DIR=%{_datadir}/%{name}
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-./build.sh -i
+%makeinstall_std -C build
 
 %clean
 rm -rf $RPM_BUILD_ROOT
