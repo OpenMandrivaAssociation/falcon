@@ -83,8 +83,8 @@ necessary for using the %{name} interpreter.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std -C build
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
