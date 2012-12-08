@@ -2,7 +2,7 @@
 
 Name:           falcon
 Version:        0.9.6.6
-Release:        %mkrel 2
+Release:        %mkrel 3
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
@@ -83,8 +83,47 @@ necessary for using the %{name} interpreter.
 %make
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 %makeinstall_std -C build
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
+
+
+%changelog
+* Tue May 03 2011 Oden Eriksson <oeriksson@mandriva.com> 0.9.6.6-2mdv2011.0
++ Revision: 664251
+- mass rebuild
+
+* Sat Sep 04 2010 Funda Wang <fwang@mandriva.org> 0.9.6.6-1mdv2011.0
++ Revision: 575944
+- New version 0.9.6.6
+
+* Tue Apr 27 2010 Funda Wang <fwang@mandriva.org> 0.9.6.4-1mdv2010.1
++ Revision: 539443
+- update file list
+- new version 0.9.6.4
+
+* Wed Jan 27 2010 Funda Wang <fwang@mandriva.org> 0.9.6-1mdv2010.1
++ Revision: 497183
+- New version 0.9.6
+
+* Sat Nov 14 2009 Funda Wang <fwang@mandriva.org> 0.9.4.4-1mdv2010.1
++ Revision: 465991
+- New version 0.9.4.4
+
+* Wed Sep 02 2009 Christophe Fergeau <cfergeau@mandriva.com> 0.8.14.2-2mdv2010.0
++ Revision: 424422
+- rebuild
+
+* Sun Mar 22 2009 Herton Ronaldo Krzesinski <herton@mandriva.com.br> 0.8.14.2-1mdv2009.1
++ Revision: 360554
+- Updated to version 0.8.14.2
+
+* Sun Nov 23 2008 Nicolas Lécureuil <nlecureuil@mandriva.com> 0.8.12-2mdv2009.1
++ Revision: 306093
+- Fix Groups
+- Fix Groups
+- import falcon
+
+
