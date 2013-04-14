@@ -2,12 +2,13 @@
 
 Name:           falcon
 Version:        0.9.6.6
-Release:        %mkrel 3
+Release:        4
 Summary:        The Falcon Programming Language
 License:        GPLv2+
 Group:          Development/Other
 URL:            http://www.falconpl.org/
 Source:         http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tgz
+Source100:	falcon.rpmlintrc
 BuildRoot:      %_tmppath/%name-%version-%release-root
 BuildRequires:  bison 
 BuildRequires:  cmake 
