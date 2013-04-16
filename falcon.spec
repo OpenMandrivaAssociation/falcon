@@ -11,7 +11,6 @@ License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.falconpl.org/
 Source0:	http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tgz
-#Source100:	falcon.rpmlintrc
 
 BuildRequires:  bison 
 BuildRequires:  cmake 
