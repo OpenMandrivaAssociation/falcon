@@ -6,7 +6,7 @@
 Summary:	The Falcon Programming Language
 Name:		falcon
 Version:	0.9.6.6
-Release:	6
+Release:	7
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.falconpl.org/
