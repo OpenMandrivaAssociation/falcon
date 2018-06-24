@@ -5,15 +5,16 @@
 
 Summary:	The Falcon Programming Language
 Name:		falcon
-Version:	0.9.6.6
-Release:	13
+Version:	0.9.6.8
+Release:	1
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.falconpl.org/
 Source0:	http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tgz
+Patch0:		Falcon-0.9.6.8-compile.patch
 
 BuildRequires:  bison 
-BuildRequires:  cmake 
+BuildRequires:  cmake ninja
 BuildRequires:  pkgconfig(libpcre)
 BuildRequires:  pkgconfig(zlib)
 
@@ -44,24 +45,28 @@ Obsoletes:	falcon-devel < 0.9.6.6-5
 This package contains development files for %{name}. This is not
 necessary for using the %{name} interpreter.
 %prep
-%setup -qn %{oname}-%{version}
+%autosetup -p1 -n %{oname}-%{version}
 
 %build
 %cmake \
-	-DFALCON_LIB_DIR=%{_libdir} \
-	-DFALCON_SHARE_DIR=%{_datadir}/%{name}
-%make
+	-DFALCON_LIB_DIR=%{_prefix}/lib \
+	-DFALCON_SHARE_DIR=%{_datadir}/%{name} \
+	-G Ninja
+%ninja
 
 %install
-%makeinstall_std -C build
+%ninja_install -C build
 
 %files
 %doc AUTHORS ChangeLog copyright README RELNOTES LICENSE LICENSE_GPLv2
 %{_bindir}/falcon
+%{_bindir}/falconenv.sh
+%{_bindir}/faldoc
 %{_bindir}/faldisass
 %{_bindir}/fallc.fal
 %{_bindir}/falrun
 %{_bindir}/falpack
+%{_bindir}/icomp.sh
 %{_libdir}/falcon
 %{_datadir}/falcon
 %{_mandir}/man1/falcon.1*
@@ -84,4 +89,4 @@ necessary for using the %{name} interpreter.
 %{_mandir}/man1/falcon-conf*
 %{_mandir}/man1/falconeer.fal*
 %{_mandir}/man1/faltest*
-
+%{_datadir}/cmake/*

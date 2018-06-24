@@ -1,0 +1,82 @@
+diff -up Falcon-0.9.6.8/engine/stringstream.cpp.omv~ Falcon-0.9.6.8/engine/stringstream.cpp
+--- Falcon-0.9.6.8/engine/stringstream.cpp.omv~	2018-06-24 16:06:54.490528573 +0200
++++ Falcon-0.9.6.8/engine/stringstream.cpp	2018-06-24 16:07:45.884530490 +0200
+@@ -199,7 +199,7 @@ bool StringStream::errorDescription( Str
+    switch( m_lastError )
+    {
+       case 0:  description = "None"; return true;
+-      case -1: description = "Out of Memory"; return true;
++      case static_cast<typeof(m_lastError)>(-1): description = "Out of Memory"; return true;
+    }
+ 
+    return false;
+diff -up Falcon-0.9.6.8/modules/native/dbi/mysql/mysql_mod.cpp.omv~ Falcon-0.9.6.8/modules/native/dbi/mysql/mysql_mod.cpp
+--- Falcon-0.9.6.8/modules/native/dbi/mysql/mysql_mod.cpp.omv~	2018-06-24 16:17:01.993551227 +0200
++++ Falcon-0.9.6.8/modules/native/dbi/mysql/mysql_mod.cpp	2018-06-24 16:18:23.661554273 +0200
+@@ -22,6 +22,9 @@
+ #include "mysql_mod.h"
+ #include <mysqld_error.h>
+ 
++#ifndef IS_LONGDATA
++#define IS_LONGDATA(t) ((t) >= MYSQL_TYPE_TINY_BLOB && (t) <= MYSQL_TYPE_STRING)
++#endif
+ 
+ namespace Falcon
+ {
+diff -up Falcon-0.9.6.8/modules/native/gtk/src/gtk_enums.cpp.omv~ Falcon-0.9.6.8/modules/native/gtk/src/gtk_enums.cpp
+--- Falcon-0.9.6.8/modules/native/gtk/src/gtk_enums.cpp.omv~	2018-06-24 16:24:07.609567098 +0200
++++ Falcon-0.9.6.8/modules/native/gtk/src/gtk_enums.cpp	2018-06-24 16:24:16.660567436 +0200
+@@ -60,7 +60,7 @@ void Enums::modInit( Falcon::Module* mod
+     { "G_TYPE_BOXED",       G_TYPE_BOXED },
+     { "G_TYPE_PARAM",       G_TYPE_PARAM },
+     { "G_TYPE_OBJECT",      G_TYPE_OBJECT },
+-    { "G_TYPE_GTYPE",       G_TYPE_GTYPE },
++    { "G_TYPE_GTYPE",       static_cast<int64>(G_TYPE_GTYPE) },
+ 
+     // BEGIN GTK CONSTANTS //
+ 
+diff -up Falcon-0.9.6.8/modules/native/gtk/src/gtk_MessageDialog.cpp.omv~ Falcon-0.9.6.8/modules/native/gtk/src/gtk_MessageDialog.cpp
+--- Falcon-0.9.6.8/modules/native/gtk/src/gtk_MessageDialog.cpp.omv~	2018-06-24 16:21:10.665560500 +0200
++++ Falcon-0.9.6.8/modules/native/gtk/src/gtk_MessageDialog.cpp	2018-06-24 16:21:23.356560973 +0200
+@@ -92,7 +92,7 @@ FALCON_FUNC MessageDialog::init( VMARG )
+     GtkWindow* parent = o_parent ? (GtkWindow*) o_parent->getObject() : NULL;
+     GtkWidget* wdt = gtk_message_dialog_new( parent,
+         (GtkDialogFlags) flags, (GtkMessageType) type, (GtkButtonsType) buttons,
+-        msg ); // can emit a warning, safely ignore.
++        "%s", msg ); // can emit a warning, safely ignore.
+     MYSELF;
+     self->setObject( (GObject*) wdt );
+ }
+@@ -131,7 +131,7 @@ FALCON_FUNC MessageDialog::new_with_mark
+     GtkWindow* parent = o_parent ? (GtkWindow*) o_parent->getObject() : NULL;
+     GtkWidget* wdt = gtk_message_dialog_new_with_markup( parent,
+         (GtkDialogFlags) flags, (GtkMessageType) type, (GtkButtonsType) buttons,
+-        msg ); // can emit a warning, safely ignore.
++        "%s", msg ); // can emit a warning, safely ignore.
+     vm->retval( new Gtk::MessageDialog(
+             vm->findWKI( "GtkMessageDialog" )->asClass(), (GtkMessageDialog*) wdt ) );
+ }
+diff -up Falcon-0.9.6.8/modules/native/mongodb/mongodb_mod.cpp.omv~ Falcon-0.9.6.8/modules/native/mongodb/mongodb_mod.cpp
+--- Falcon-0.9.6.8/modules/native/mongodb/mongodb_mod.cpp.omv~	2018-06-24 16:31:01.136582519 +0200
++++ Falcon-0.9.6.8/modules/native/mongodb/mongodb_mod.cpp	2018-06-24 16:31:11.044582888 +0200
+@@ -1321,7 +1321,7 @@ BSONIter::makeItem( const bson_type tp,
+         //...
+         break;
+     case bson_long:
+-        it = new Item( bson_iterator_long_raw( iter ) );
++        it = new Item( static_cast<int64>(bson_iterator_long_raw( iter )) );
+         break;
+     case bson_eoo:
+     default:
+diff -up Falcon-0.9.6.8/modules/native/mongodb/src/platform_hacks.h.omv~ Falcon-0.9.6.8/modules/native/mongodb/src/platform_hacks.h
+--- Falcon-0.9.6.8/modules/native/mongodb/src/platform_hacks.h.omv~	2018-06-24 16:29:43.689579631 +0200
++++ Falcon-0.9.6.8/modules/native/mongodb/src/platform_hacks.h	2018-06-24 16:29:48.732579819 +0200
+@@ -42,7 +42,7 @@
+ #elif defined(MONGO_USE__INT64)
+ typedef __int64 int64_t;
+ #elif defined(MONGO_USE_LONG_LONG_INT)
+-typedef long long int int64_t;
++//typedef long long int int64_t;
+ #else
+ #error must have a 64bit int type
+ #endif
