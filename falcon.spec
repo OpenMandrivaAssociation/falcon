@@ -19,6 +19,8 @@ BuildRequires:  pkgconfig(libpcre)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(SDL_ttf)
+BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(gtk+-2.0)
 
