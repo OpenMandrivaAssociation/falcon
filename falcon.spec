@@ -17,6 +17,10 @@ BuildRequires:  bison
 BuildRequires:  cmake ninja
 BuildRequires:  pkgconfig(libpcre)
 BuildRequires:  pkgconfig(zlib)
+BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(sqlite)
+BuildRequires:	pkgconfig(gtk+-2.0)
 
 %description
 The Falcon Programming Language is an embeddable scripting language
