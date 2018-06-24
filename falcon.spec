@@ -19,7 +19,7 @@ BuildRequires:  pkgconfig(libpcre)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(sdl)
-BuildRequires:	pkgconfig(sqlite)
+BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(gtk+-2.0)
 
 %description
@@ -48,6 +48,15 @@ Obsoletes:	falcon-devel < 0.9.6.6-5
 %description -n %{devname}
 This package contains development files for %{name}. This is not
 necessary for using the %{name} interpreter.
+
+%package gtk
+Summary:	GTK bindings for Falcon
+Group:		Development/Other
+Requires:	%{name} = %{EVRD}
+
+%description gtk
+GTK bindings for Falcon
+
 %prep
 %autosetup -p1 -n %{oname}-%{version}
 
@@ -72,6 +81,7 @@ necessary for using the %{name} interpreter.
 %{_bindir}/falpack
 %{_bindir}/icomp.sh
 %{_libdir}/falcon
+%exclude %{_libdir}/falcon/gtk_fm.so
 %{_datadir}/falcon
 %{_mandir}/man1/falcon.1*
 %{_mandir}/man1/faldisass.1*
@@ -94,3 +104,6 @@ necessary for using the %{name} interpreter.
 %{_mandir}/man1/falconeer.fal*
 %{_mandir}/man1/faltest*
 %{_datadir}/cmake/*
+
+%files gtk
+%{_libdir}/falcon/gtk_fm.so
