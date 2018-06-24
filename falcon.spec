@@ -3,6 +3,10 @@
 %define libname	%mklibname %{name}_engine %{major}
 %define devname	%mklibname %{name}_engine -d
 
+%ifarch %{ix86}
+%global optflags %{optflags} -fuse-ld=bfd -fPIC
+%endif
+
 Summary:	The Falcon Programming Language
 Name:		falcon
 Version:	0.9.6.8
