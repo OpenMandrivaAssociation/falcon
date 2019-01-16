@@ -3,7 +3,7 @@
 %define libname	%mklibname %{name}_engine %{major}
 %define devname	%mklibname %{name}_engine -d
 
-%ifarch %{ix86}
+%ifarch %{ix86} znver1
 %global optflags %{optflags} -fuse-ld=bfd -fPIC
 %endif
 
