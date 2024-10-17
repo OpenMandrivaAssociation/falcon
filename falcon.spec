@@ -13,7 +13,7 @@ Version:	0.9.6.8
 Release:	4
 License:	GPLv2+
 Group:		Development/Other
-Url:		http://www.falconpl.org/
+Url:		https://www.falconpl.org/
 Source0:	http://www.falconpl.org/project_dl/_official_rel/%{oname}-%{version}.tgz
 Patch0:		Falcon-0.9.6.8-compile.patch
 
